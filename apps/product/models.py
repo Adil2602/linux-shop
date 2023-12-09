@@ -6,5 +6,5 @@ class Product(models.Model):
     price = models.CharField('Price', )
     photo = models.ImageField('Photo', upload_to='product/')
     description = models.TextField('Description', blank=True, null=True)
-
+    # expiration_date = models.DateTimeField('Срок годности до', blank=True, null=True)
 
