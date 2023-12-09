@@ -9,4 +9,3 @@ class ProductList(ListView):
     template_name = 'product.html'
     context_object_name = 'products'
     queryset = Product.objects.all()
-    expiration_date = models.DateField('Срок годности до')
