@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
+from ..product.models import Product
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -43,6 +44,6 @@ class User(AbstractUser):
                                blank=True)
     created = models.DateTimeField('Account creation date',
                                    auto_now_add=True)
-    # favorite_product = models.ManyToManyField('Product',
-    #                                           verbose_name='basket',
-    #                                           related_name='favorite_product',)
+    favorite_product = models.ManyToManyField(Product,
+                                              verbose_name='basket',
+                                              related_name='favorite_product',)
