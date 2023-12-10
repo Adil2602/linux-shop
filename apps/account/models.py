@@ -32,13 +32,13 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     username = models.CharField('Username',
-                                max_length=10,
+                                max_length=20,
                                 unique=True)
     email = models.EmailField('Email',
-                              max_length=20,
+                              max_length=40,
                               unique=True)
     avatar = models.ImageField('Avatar',
-                               upload_to='media/images/',
+                               upload_to='.media/images/',
                                null=True,
                                blank=True)
     created = models.DateTimeField('Account creation date',

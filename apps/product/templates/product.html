@@ -2,28 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
 </head>
 <body>
 
     <header>
-        <h1>Найс</h1>
+        <h1>Products</h1>
     </header>
 
     <main>
-        <p>щя нужно добавить продуктов</p>
+        {% for product in products %}
+            <h2>{{ product.title }}</h2>
+            <p>{{ product.price }}</p>
+            <img src="{{ product.photo.url }}" alt="{{ product.title }}" width="50" height="50">
+            <p>{{ product.description }}</p>
+        {% endfor %}
     </main>
 
     <footer>
         <p>© 2023 Am1n</p>
-=======
-    <title>Title</title>
-</head>
-<body>
+    </footer>
 
 </body>
 </html>
->>>>>>> origin/Amin_branch
