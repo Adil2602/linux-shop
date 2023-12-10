@@ -1,5 +1,10 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, FormView, CreateView
+from .forms import RegisterForm, LoginForm
+from django.urls import reverse_lazy
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
+from django.template.context_processors import request
 
 class RegisterView(CreateView):
     template_name ='register.html'
