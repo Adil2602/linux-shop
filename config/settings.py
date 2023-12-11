@@ -41,7 +41,6 @@ INSTALLED_APPS = [
 
     #  My Apps
     'apps.account',
-    'apps.category',
     'apps.seller',
     'apps.product',
     'apps.basket',

@@ -5,7 +5,6 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.template.context_processors import request
-
 class RegisterView(CreateView):
     template_name ='register.html'
     form_class = RegisterForm
