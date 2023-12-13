@@ -13,7 +13,7 @@ class Category(models.Model):
         return self.title
 class Product(models.Model):
     title = models.CharField('Product',max_length=100)
-    price = models.DecimalField('Price', max_digits=10, decimal_places=2)
+    price = models.IntegerField('Price')
     photo = models.ImageField('Photo', upload_to='product/')
     description = models.TextField('Description', blank=True, null=True)
     expiration_date = models.DateField('expiration date', blank=True, null=True)
