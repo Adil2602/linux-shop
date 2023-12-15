@@ -6,6 +6,14 @@ urlpatterns = [
          ProductList.as_view(),
          name='product'),
 
+    path('',
+         CategoryList.as_view(),
+         name='index'),
+
+    path('category/<int:pk>/products/',
+         ProductListByCategory.as_view(),
+         name='category_detail'),
+
     path('api/list/',
          ProductListApiView.as_view(),
          name='ListApi'),

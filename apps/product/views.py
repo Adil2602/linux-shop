@@ -1,7 +1,7 @@
 from django.db import models
 from django.shortcuts import render
-from django.views.generic import ListView
-from .models import Product
+from django.views.generic import ListView, DetailView
+from .models import Product, Category
 from rest_framework import generics
 from rest_framework import views
 from .serializers import ProductSerializer
@@ -13,6 +13,22 @@ class ProductList(ListView):
     template_name = 'product.html'
     context_object_name = 'products'
     queryset = Product.objects.all()
+
+class ProductListByCategory(ListView):
+    model = Product
+    template_name = 'category_detail.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        category_id = self.kwargs['pk']
+        category = Category.objects.get(pk=category_id)
+        return Product.objects.filter(category=category)
+
+class CategoryList(ListView):
+    model = Category
+    template_name = 'category.html'
+    context_object_name = 'categories'
+    queryset = Category.objects.all()
 
 class ProductListApiView(generics.ListAPIView):
     serializer_class = ProductSerializer
