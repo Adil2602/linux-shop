@@ -1,6 +1,8 @@
+{% extends 'base.html' %}
+
 {% load static %}
 
-<html lang="en">
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,37 +10,34 @@
     <title>Sign Up Form by Colorlib</title>
 
     <!-- Font Icon -->
-    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts_register/material-icon/css/material-design-iconic-font.min.css' %}">
 
     <!-- Main css -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css_register/style.css' %}">
 </head>
-<body>
-
-    <div class="main">
-
         <!-- Sign up form -->
         <section class="signup">
             <div class="container">
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
-                        <form method="POST" class="register-form" id="register-form">
+                        <form action="" method="post" class="register-form" id="register-form">
+                            {% csrf_token %}
                             <div class="form-group">
-                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name"/>
+                                <label> <i class="zmdi zmdi-account material-icons-name"></i></label>
+                                {{ form.username }}
                             </div>
                             <div class="form-group">
-                                <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Your Email"/>
+                                <label><i class="zmdi zmdi-email"></i></label>
+                                {{ form.email }}
                             </div>
                             <div class="form-group">
-                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Password"/>
+                                <label><i class="zmdi zmdi-lock"></i></label>
+                                {{ form.password1 }}
                             </div>
                             <div class="form-group">
-                                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                                <label><i class="zmdi zmdi-lock-outline"></i></label>
+                                {{ form.password2 }}
                             </div>
                             <div class="form-group">
                                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
@@ -56,10 +55,9 @@
                 </div>
             </div>
         </section>
-    </div>
 
     <!-- JS -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
-</body><!-- This template was made by Colorlib (https://colorlib.com) -->
-</html>
+    <script src="{% static 'vendor_register/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js_register/main.js' %}"></script>
+<!-- This template was made by Colorlib (https://colorlib.com) -->
+{% endblock %}
