@@ -3,6 +3,21 @@
 {% load static %}
 
 {% block content %}
+	<section id="home-section" class="hero">
+		  <div class="home-slider owl-carousel">
+	      <div class="slider-item" style="background-image: url({% static 'images/bg_1.jpg' %});">
+	      	<div class="overlay"></div>
+	        <div class="container">
+	          <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
+	            <div class="col-md-12 ftco-animate text-center">
+	              <h1 class="mb-2">We serve Fresh Products</h1>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+    </section>
+
 <section class="ftco-section">
     	<div class="container">
 				<div class="row justify-content-center mb-3 pb-3">
@@ -19,7 +34,7 @@
     					<a href="#" class="img-prod"><img src="{{category.photo.url}}" width="250" height="250">
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="{% url 'product_detail' product.id %}"><span>{{category.title}}</span></a></h3>
+    						<h3><a href="{% url 'category_detail' category.id %}"><span>{{category.title}}</span></a></h3>
     					</div>
     				</div>
     			</div>

@@ -8,21 +8,22 @@ from .serializers import ProductSerializer
 from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
+class IndexView(ListView):
+    template_name = 'category.html'
+    context_object_name = 'category'
+    queryset = Category.objects.all()
+
 class ProductList(ListView):
     model = Product
     template_name = 'product.html'
     context_object_name = 'products'
     queryset = Product.objects.all()
 
-class ProductListByCategory(ListView):
-    model = Product
+class CategoryDetail(DetailView):
+    model = Category
     template_name = 'category_detail.html'
     context_object_name = 'products'
-
-    def get_queryset(self):
-        category_id = self.kwargs['pk']
-        category = Category.objects.get(pk=category_id)
-        return Product.objects.filter(category=category)
+    queryset = Category.objects.all()
 
 class CategoryList(ListView):
     model = Category
