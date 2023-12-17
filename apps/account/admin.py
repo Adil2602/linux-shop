@@ -12,3 +12,5 @@ class UserAdmin(admin.ModelAdmin):
         'avatar',
         'created',
     ]
+
+# Adil
