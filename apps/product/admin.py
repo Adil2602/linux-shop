@@ -20,8 +20,8 @@ class ProductAdmin(admin.ModelAdmin):
     display_photo.short_description = 'Photo'
 
     def display_categories(self, obj):
-        # Display a comma-separated list of related categories
-        return ', '.join(category.title for category in obj.category.all())
+        # Display the title of the related category
+        return obj.category.title if obj.category else ''
 
     display_categories.short_description = 'Categories'
 

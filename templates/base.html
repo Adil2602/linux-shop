@@ -37,14 +37,14 @@
 		    		<div class="row d-flex">
 		    			<div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
-						    <span class="text">+ 1235 2355 98</span>
+						    <span class="text">+ 996 501 592 328</span>
 					    </div>
 					    <div class="col-md pr-4 d-flex topper align-items-center">
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">youremail@email.com</span>
+						    <span class="text">Admin@gmail.com</span>
 					    </div>
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-						    <span class="text">3-5 Business days delivery &amp; Free Returns</span>
+						    <span class="text">"Открой для себя вкус и свежесть с нашим разнообразием продуктов прямо у тебя дома!"</span>
 					    </div>
 				    </div>
 			    </div>
@@ -63,9 +63,12 @@
 	          <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Category</a></li>
               <li class="nav-item"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
 	          <li class="nav-item"><a href="" class="nav-link">Contact</a></li>
-              <li class="nav-item"><a href="" class="nav-link">Register</a></li>
-              <li class="nav-item"><a href="" class="nav-link">Login</a></li>
-              <li class="nav-item"><a href="" class="nav-link">Logout</a></li>
+                {% if not request.user.is_authenticated %}
+              <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Register</a></li>
+              <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                {% else %}
+              <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                {% endif %}
 	          <li class="nav-item cta cta-colored"><a href="" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 
 	        </ul>
@@ -114,9 +117,9 @@
             	<h2 class="ftco-heading-2">Have a Questions?</h2>
             	<div class="block-23 mb-3">
 	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+	                <li><span class="icon icon-map-marker"></span><span class="text">Kyrgystan, Bishkek, Ahunbaeva 133/1                 </span></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+996 703 060 202</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">Dlangoinfo@gmail.com</span></a></li>
 	              </ul>
 	            </div>
             </div>
