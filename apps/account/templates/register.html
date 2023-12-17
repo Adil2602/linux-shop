@@ -1,23 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
-    <!-- Подключите стили или используйте свои собственные -->
-    <link rel="stylesheet" href="path/to/your/styles.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'fonts_register/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css_register/style.css' %}">
 </head>
-<body>
+        <!-- Sign up form -->
 
-    <div class="container">
-        <h2>Registration</h2>
-        <form method="post" action="{% url 'register' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form action="" method="post" class="register-form" id="register-form">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label> <i class="zmdi zmdi-account material-icons-name"></i></label>
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group">
+                                <label><i class="zmdi zmdi-email"></i></label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                <label><i class="zmdi zmdi-lock"></i></label>
+                                {{ form.password1 }}
+                            </div>
+                            <div class="form-group">
+                                <label><i class="zmdi zmdi-lock-outline"></i></label>
+                                {{ form.password2 }}
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="{% static '/images_register/signup-image.jpg' %}" alt="sing up image"></figure>
+                        <a href="#" class="signup-image-link">I am already a member</a>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
 
-            <button type="submit">Register</button>
-        </form>
-    </div>
-
-</body>
-</html>
+    <!-- JS -->
+    <script src="{% static 'vendor_register/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js_register/main.js' %}"></script>
+<!-- This template was made by Colorlib (https://colorlib.com) -->

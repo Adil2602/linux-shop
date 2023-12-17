@@ -44,6 +44,4 @@ class User(AbstractUser):
                                blank=True)
     created = models.DateTimeField('Account creation date',
                                    auto_now_add=True)
-    favorite_product = models.ManyToManyField(Product,
-                                              verbose_name='basket',
-                                              related_name='favorite_product',)
+

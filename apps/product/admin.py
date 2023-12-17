@@ -11,7 +11,7 @@ class ProductAdmin(admin.ModelAdmin):
         'expiration_date',
         'display_categories',
     ]
-    filter_horizontal = ['category']
+    list_filter = ['category']
 
     def display_photo(self, obj):
         # Display a thumbnail for the 'photo' field
