@@ -9,3 +9,4 @@ urlpatterns = [
     path('api/list/', ProductListApiView.as_view(), name='ListApi'),
     path('api/retrieve/', ProductRetrieveApiView.as_view(), name='RetrieveApi'),
 ]
+
