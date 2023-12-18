@@ -8,11 +8,6 @@ from .serializers import ProductSerializer
 from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
-class IndexView(ListView):
-    template_name = 'category.html'
-    context_object_name = 'category'
-    queryset = Category.objects.all()
-
 class ProductList(ListView):
     model = Product
     template_name = 'product.html'

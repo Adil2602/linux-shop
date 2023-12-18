@@ -8,7 +8,7 @@ from django.template.context_processors import request
 class RegisterView(CreateView):
     template_name ='register.html'
     form_class = RegisterForm
-    success_url = reverse_lazy('product')
+    success_url = reverse_lazy('category')
 
 class LoginView(FormView):
     template_name = 'login.html'
@@ -24,7 +24,7 @@ class LoginView(FormView):
         if user is not None:
             if user.is_active:
                 login(self.request, user)
-                return redirect('product')
+                return redirect('category')
             else:
                 return HttpResponse('Ваш аккаунт забанен')
         return HttpResponse('Такого юзера не существует')
@@ -33,4 +33,4 @@ class LoginView(FormView):
 def UserLogout(request):
     if request.user.is_authenticated:
         logout(request)
-        return redirect('product')
+        return redirect('category')
