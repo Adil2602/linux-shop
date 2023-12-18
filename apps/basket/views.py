@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from ..basket.models import Cart
 
-
+# test
 # Create your views here.
 class CartView(ListView):
     model = Cart
