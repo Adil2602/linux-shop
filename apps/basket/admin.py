@@ -17,6 +17,7 @@ class CartAdmin(admin.ModelAdmin):
     inlines = [CartItemInline]
 
     def item_count(self, obj):
+        
         return obj.cartitem_set.aggregate(Sum('quantity'))['quantity__sum']
     item_count.short_description = 'Item Count'
 

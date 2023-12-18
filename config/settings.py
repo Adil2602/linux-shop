@@ -44,8 +44,6 @@ INSTALLED_APPS = [
     'apps.seller',
     'apps.product',
     'apps.basket',
-    'apps.search'
-    'rest_framework'
 ]
 
 MIDDLEWARE = [

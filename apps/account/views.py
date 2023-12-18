@@ -1,16 +1,14 @@
-from rest_framework import generics
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView, CreateView
 from .forms import RegisterForm, LoginForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
-from .serializers import UserSerializer
-from .models import User
+from django.template.context_processors import request
 class RegisterView(CreateView):
     template_name ='register.html'
     form_class = RegisterForm
-    success_url = reverse_lazy('product/')
+    success_url = reverse_lazy('login')
 
 class LoginView(FormView):
     template_name = 'login.html'
@@ -26,7 +24,7 @@ class LoginView(FormView):
         if user is not None:
             if user.is_active:
                 login(self.request, user)
-                return redirect('index')
+                return redirect('category')
             else:
                 return HttpResponse('Ваш аккаунт забанен')
         return HttpResponse('Такого юзера не существует')
@@ -35,16 +33,4 @@ class LoginView(FormView):
 def UserLogout(request):
     if request.user.is_authenticated:
         logout(request)
-        return redirect('index')
-
-
-
-
-class UserListApiView(generics.ListAPIView):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
-    # permission_classes = IsAuthenticated
-
-class UserRetrieveApiView(generics.RetrieveAPIView):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
+        return redirect('category')
