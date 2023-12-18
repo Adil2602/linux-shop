@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+{% load custom_filters %}
   <head>
     <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
@@ -69,7 +70,8 @@
                 {% else %}
               <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
                 {% endif %}
-	          <li class="nav-item cta cta-colored"><a href="" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+	          <li class="nav-item cta cta-colored"><a href="{% url 'cart' %}"
+                       class="nav-link"><span class="icon-shopping_cart"></span>[{{ carts|total_items }}]</a></li>
 
 	        </ul>
 	      </div>

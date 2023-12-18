@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'apps.seller',
     'apps.product',
     'apps.basket',
+    'apps.basket.templatetags',
 ]
 
 MIDDLEWARE = [

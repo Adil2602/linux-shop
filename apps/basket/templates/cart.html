@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load custom_filters %}
+
+{% block content %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,9 +29,14 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+        .checkout-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
         .checkout-button {
             display: block;
-            margin-top: 20px;
             padding: 10px;
             background-color: #4caf50;
             color: white;
@@ -35,7 +44,52 @@
             text-decoration: none;
             font-size: 16px;
             cursor: pointer;
+            margin-top: 10px;
         }
+        .total {
+            font-weight: bold;
+            margin-top: 10px;
+        .checkout-container {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .total {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+    .checkout-button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 18px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        color: #fff;
+        background-color: #28a745;
+        border: 1px solid #28a745;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .checkout-button:hover {
+        background-color: #81c24c;
+        }
+        .total {
+    font-size: 24px; /* увеличим размер шрифта */
+    margin-bottom: 15px;
+    font-weight: bold; /* сделаем текст полужирным */
+    color: #333; /* цвет текста (замените на нужный вам) */
+}
+       .checkout-container {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px; /* добавим внутренний отступ для контейнера */
+    border: 1px solid #ddd; /* добавим рамку для контейнера */
+    border-radius: 50px; /* закруглим углы */
+}
+
     </style>
 </head>
 <body>
@@ -48,22 +102,38 @@
                 <th>Название продукта</th>
                 <th>Цена</th>
                 <th>Количество</th>
-                <th>Сумма</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Пример строки с продуктом -->
-            <tr>
-                <td>Пример продукта 1</td>
-                <td>$10.00</td>
-                <td>2</td>
-                <td>$20.00</td>
-            </tr>
-            <!-- Добавьте дополнительные строки для других продуктов по аналогии -->
+            {% for cart in carts %}
+                {% for item in cart.cartitem_set.all %}
+                    <tr>
+                        <td>{{ item.product.title }}</td>
+                        <td>{{ item.product.price }} Сом</td>
+                        <td>{{ item.quantity }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
-    <a href="#" class="checkout-button">Оформить заказ</a>
+    <div style=".total {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #333;
+}
+" class="checkout-container">
+        <p class="total">Итого: {{ carts|total_price }} Сом</p>
+        <a href="#" class="checkout-button">Оформить заказ</a>
+    </div>
 
 </body>
 </html>
+
+{% endblock %}
+
+
+
+
+

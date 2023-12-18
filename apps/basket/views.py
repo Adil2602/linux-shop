@@ -7,5 +7,5 @@ from ..basket.models import Cart
 class CartView(ListView):
     model = Cart
     context_object_name = 'carts'
-    # template_name = 'cart.html'
+    template_name = 'cart.html'
     queryset = Cart.objects.all()
