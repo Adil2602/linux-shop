@@ -23,6 +23,7 @@ urlpatterns = [
     path('account/', include('apps.account.urls')),
 ]
 
+
 from django.conf import settings
 from django.conf.urls.static import static
 

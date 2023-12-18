@@ -8,7 +8,7 @@ from django.template.context_processors import request
 class RegisterView(CreateView):
     template_name ='register.html'
     form_class = RegisterForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('category')
 
 class LoginView(FormView):
     template_name = 'login.html'

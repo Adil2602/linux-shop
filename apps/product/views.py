@@ -8,25 +8,22 @@ from .serializers import ProductSerializer
 from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
-
 class ProductList(ListView):
     model = Product
     template_name = 'product.html'
     context_object_name = 'products'
     queryset = Product.objects.all()
 
-
+class CategoryDetail(DetailView):
+    model = Category
+    template_name = 'category_detail.html'
+    context_object_name = 'products'
+    queryset = Category.objects.all()
 
 class CategoryList(ListView):
     model = Category
     template_name = 'category.html'
     context_object_name = 'categories'
-    queryset = Category.objects.all()
-
-class CategoryDetail(DetailView):
-    model = Category
-    template_name = 'category_detail.html'
-    context_object_name = 'category_detail'
     queryset = Category.objects.all()
 
 class ProductListApiView(generics.ListAPIView):
