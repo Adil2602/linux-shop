@@ -5,22 +5,26 @@
 {% block content %}
 <html lang="en">
   <body class="goto-here">
+    <div class="hero-wrap hero-bread" style="background-image: url({% static 'images/bg_1.jpg' %});">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-0 bread">Products</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+	<div class="container text-center">
+    <h2 style="font-family: 'Roboto', sans-serif;">{{ category_detail.title }}</h2>
+    <img src="{{ category_detail.photo.url }}" alt="{{ category_detail.title }}" width="300" height="300">
+    <p style="font-family: 'Your Font', sans-serif;">{{ category_detail.description }}</p>
+
+    <h3 style="font-family: 'Roboto', sans-serif;">Продукты из этой категории:</h3>
+	</div>
     <section class="ftco-section">
     	<div class="container">
-    		<div class="row justify-content-center">
-    			<div class="col-md-10 mb-5 text-center">
-    				<ul class="product-category">
-    					<li><a href="#" class="active">All</a></li>
-    					<li><a href="#">Vegetables</a></li>
-    					<li><a href="#">Fruits</a></li>
-    					<li><a href="#">Juice</a></li>
-    					<li><a href="#">Dried</a></li>
-    				</ul>
-    			</div>
-    		</div>
-           <!-- template.html -->
-
-{% for product in products %}
+    		<div class="row">
+				{% for product in category_detail.ProductCategory.all %}
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
     					<div class="img-prod" >
@@ -45,7 +49,7 @@
     				</div>
     			</div>
 				{% endfor %}
-
+    		</div>
     		<div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
@@ -62,6 +66,7 @@
           </div>
         </div>
     	</div>
+
     </section>
   </body>
 </html>
