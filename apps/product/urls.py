@@ -7,5 +7,6 @@ urlpatterns = [
     path('category/detail/<int:pk>/', CategoryDetail.as_view(), name='category_detail'),
     path('api/list/', ProductListApiView.as_view(), name='ListApi'),
     path('api/retrieve/', ProductRetrieveApiView.as_view(), name='RetrieveApi'),
+    path('search/', Search.as_view(), name='search'),
 ]
 

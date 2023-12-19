@@ -4,6 +4,12 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+ .no-results-message {
+    text-align: center;
+    margin: 50px 0; /* Регулируйте отступ сверху и снизу, чтобы центрировать по вертикали */
+    font-size: 25px; /* Регулируйте размер шрифта по вашему вкусу */
+    color: #000; /* Цвет текста */
+}
 :root {
   --blue: #007bff;
   --indigo: #6610f2;

@@ -3,6 +3,36 @@
 {% load static %}
 {% load custom_filters %}
   <head>
+      <style type="text/css">
+/* Обводка инпута */
+input[type="search"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: black;
+}
+input[type="search"] {
+    border: 2px solid #333;  /* Толщина и цвет обводки */
+    padding: 8px;  /* Внутренний отступ для улучшения визуального восприятия */
+    margin: 5px;  /* Внешний отступ для управления расположением инпута */
+}
+
+/* Цвет кнопки */
+.btn-outline-success {
+    color: #28a745;  /* Цвет текста кнопки */
+    background-color: #fff;  /* Цвет фона кнопки */
+    border-color: #28a745;  /* Цвет обводки кнопки */
+    padding: 10px;  /* Внутренний отступ для улучшения визуального восприятия */
+    margin: 5px;  /* Внешний отступ для управления расположением кнопки */
+}
+
+/* Эффект при наведении на кнопку */
+.btn-outline-success:hover {
+    color: #fff;  /* Цвет текста при наведении */
+    background-color: #28a745;  /* Цвет фона при наведении */
+    border-color: #28a745;  /* Цвет обводки при наведении */
+}
+    </style>
     <title>Vegefoods - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -29,6 +59,7 @@
     <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
   </head>
   <body class="goto-here">
         <div class="py-1 bg-primary">
@@ -67,8 +98,15 @@
                 {% if not request.user.is_authenticated %}
               <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Register</a></li>
               <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                <li> <form action="{% url 'search' %}"></form></li>
                 {% else %}
               <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                 <li class="nav-item">
+            <form  method="get" action="{% url 'search' %}">
+                <input class="nav-link" type="search" placeholder="Search" aria-label="Search" name="q">
+                <button  type="submit">Search</button>
+            </form>
+        </li>
                 {% endif %}
 	          <li class="nav-item cta cta-colored"><a href="{% url 'cart' %}"
                        class="nav-link"><span class="icon-shopping_cart"></span>[{{ carts|total_items }}]</a></li>
@@ -78,7 +116,6 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
-
 	{% block content %}
 
 	{% endblock %}
