@@ -1,12 +1,16 @@
 from django.db import models
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.views.generic import ListView, DetailView, UpdateView
+from rest_framework.viewsets import ModelViewSet
 from .models import Product, Category
-from rest_framework import generics
-from rest_framework import views
 from .serializers import ProductSerializer
-from rest_framework.permissions import IsAuthenticated
 from django.db.models import Q
+from ..account.permissions import IsFarmerOrReadOnlyAndAuthenticated
+
+from .forms import ProductAddForm
+from .forms import ProductUpdateForm
+
 
 # Create your views here.
 
@@ -32,18 +36,47 @@ class CategoryDetail(DetailView):
     queryset = Category.objects.all()
 
 
-class ProductListApiView(generics.ListAPIView):
-    serializer_class = ProductSerializer
-    context_object_name = 'products'
-    queryset = Product.objects.all()
-    # permission_classes = IsAuthenticated
-
-
-class ProductRetrieveApiView(generics.RetrieveAPIView):
+class ProductListApiViewSet(ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
+    permission_classes = (IsFarmerOrReadOnlyAndAuthenticated,)
+
+    def perform_create(self, serializer):
+        serializer.validated_data['user'] = self.request.user
+        serializer.save()
 
 
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductUpdateForm
+    template_name = 'update_product.html'
+    context_object_name = 'product_update'
+    queryset = Product.objects.all()
+    permission_classes = (IsFarmerOrReadOnlyAndAuthenticated,)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.get_form()
+        return context
+
+    def get_success_url(self):
+        return reverse('profile')
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductAddForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save(commit=False)
+
+            # Устанавливаем пользователя, который создает продукт
+            product.user = request.user
+
+            product.save()
+            return redirect('product')
+
+    else:
+        form = ProductAddForm()
+
+    return render(request, 'create_product.html', {'form': form})
 
 
 class Search(ListView):
@@ -64,7 +97,7 @@ class Search(ListView):
 
         if not context['products']:
             context['no_results'] = True
-            context['suggestions'] = Product.objects.values_list('title', flat=True)[:5]  # Подсказки для запроса
+            context['suggestions'] = Product.objects.values_list('title', flat=True)[:3]  # Подсказки для запроса
         else:
             context['no_results'] = False
 

@@ -1,10 +1,7 @@
 from django.db import models
-
-
-# Create your models here.
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
-from ..product.models import Product
+
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -31,17 +28,31 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
         return self.create_user(email, password, **extra_fields)
 
+
 class User(AbstractUser):
-    username = models.CharField('Username',
-                                max_length=20,
-                                unique=True)
-    email = models.EmailField('Email',
-                              max_length=40,
-                              unique=True)
-    avatar = models.ImageField('Avatar',
-                               upload_to='.media/images/',
-                               null=True,
-                               blank=True)
-    created = models.DateTimeField('Account creation date',
-                                   auto_now_add=True)
+    username = models.CharField('Username', max_length=20, unique=True)
+    email = models.EmailField('Email', max_length=40, unique=True)
+    avatar = models.ImageField('Avatar', upload_to='.media/images/', null=True, blank=True)
+    created = models.DateTimeField('Account creation date', auto_now_add=True)
+
+    is_farmer = models.BooleanField(default=False)
+
+    def save_as_farmer(self):
+        self.is_farmer = True
+        self.save()
+
+
+
+class Farmer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='UserFarmer')
+    phone = models.CharField('Phone', max_length=15, null=True, blank=True)
+    first_name = models.CharField(max_length=100, null=True, blank=True)
+    last_name = models.CharField(max_length=100, null=True, blank=True)
+    farm_address = models.CharField(max_length=255, null=True, blank=True)
+
+    card_number = models.CharField(max_length=16, null=True, blank=True)
+    card_holder_name = models.CharField(max_length=100, null=True, blank=True)
+    expiration_date = models.DateField('expirations date', null=True, blank=True)
+    cvv_code = models.CharField(max_length=3, null=True, blank=True)
+
 

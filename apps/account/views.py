@@ -1,16 +1,19 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, FormView, CreateView
+from django.views import View
+from django.views.generic import TemplateView, FormView, CreateView, DetailView
 from rest_framework.viewsets import GenericViewSet
 
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, FarmerRegistrationForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from rest_framework import viewsets, mixins
 from django.template.context_processors import request
 
-from .models import User
+from .models import User, Farmer
 from .serializers import UserSerializer
+from ..product.models import Product
 
 
 class RegisterView(CreateView):
@@ -56,3 +59,31 @@ class UserApiViewSet(mixins.CreateModelMixin,
                      GenericViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+
+
+
+@login_required
+def my_profile(request):
+    current_user = request.user
+    user_products = Product.objects.filter(user=current_user)
+    is_farmer = current_user.is_farmer
+    return render(request, 'profile.html', {'user': current_user, 'user_products': user_products, 'is_farmer': is_farmer})
+
+
+class FarmerRegistrationView(CreateView):
+    model = Farmer
+    form_class = FarmerRegistrationForm
+    template_name = 'ForS.html'
+    success_url = 'profile'
+
+    def post(self, request):
+        form = FarmerRegistrationForm(request.POST)
+        if form.is_valid():
+            farmer = form.save(commit=False)
+            farmer.user = request.user
+            farmer.save()
+
+            return redirect('profile')
+
+        return render(request, self.template_name, {'form': form})

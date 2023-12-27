@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} My profile {% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="main-body">
+        <div class="row gutters-sm">
+            <!-- Вывод информации о фермере, если пользователь - фермер -->
+            {% if is_farmer %}
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h4>{{ current_user.farmer.first_name }} {{ current_user.farmer.last_name }}</h4>
+                                <p class="text-secondary mb-1">Фермер</p>
+                                <p class="text-muted font-size-sm">{{ current_user.farmer.farm_address }}</p>
+                                <button class="btn btn-primary">Подписаться</button>
+                                <button class="btn btn-outline-primary">Сообщение</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+
+{% if user.avatar %}
+    <img src="{{ user.avatar.url }}" width="250" height="250" alt="{{ user.username }} Avatar">
+{% else %}
+    <p>No avatar available</p>
+{% endif %}
+
+            {% endif %}
+
+            <!-- Вывод информации о пользователе, в любом случае -->
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Username</h6>
+                            </div>
+                         <div class="col-sm-9 text-secondary">
+                        {{ user.username }}
+                         </div>
+
+                        </div>
+                                   <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ user.email }}
+                            </div>
+                        </div>
+                        <!-- Добавьте другие поля по необходимости -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if is_farmer %}
+<div class="container">
+    <div class="text-center">
+        <a href="{% url 'add_product' %}" class="btn btn-primary">Добавить продукт</a>
+        <h3 class="mb-4">Ваши продукты:</h3>
+        <div class="row">
+            {% for product in user_products %}
+            <div class="col-md-6 col-lg-3 ftco-animate">
+                <div class="product">
+                    <a href="/product/update/{{ product.id }}" class="img-prod">
+                        <img src="{{ product.photo.url }}" width="250" height="250"></a>
+                    <div class="text py-3 pb-4 px-3 text-center">
+                        <h3><a href="/product/update/{{ product.id }}"><span>{{ product.title }}</span></a></h3>
+                        <div class="d-flex">
+                            <div class="pricing">
+                                <p class="price"><span>{{ product.price }} Сом</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% else %}
+<p>Вы не являетесь фермером. Зарегистрируйтесь как фермер, чтобы предложить свои продукты.</p>
+{% endif %}
+
+{% endblock %}

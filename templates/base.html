@@ -66,14 +66,7 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item"><a href="{% url 'category' %}" class="nav-link">Category</a></li>
               <li class="nav-item"><a href="{% url 'product' %}" class="nav-link">Product</a></li>
-	          <li class="nav-item"><a href="" class="nav-link">Contact</a></li>
-                {% if not request.user.is_authenticated %}
-              <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Register</a></li>
-              <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
-                <li> <form action="{% url 'search' %}"></form></li>
-                {% else %}
-              <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
-                {% endif %}
+<!--	          <li class="nav-item"><a href="" class="nav-link">Contact</a></li>-->
                 </ul>
                 <form action="{% url 'search' %}" method="get">
                     <div class="input-group">
@@ -89,7 +82,22 @@
 	          <li class="nav-item cta cta-colored"><a href="{% url 'cart' %}"
                        class="nav-link"><span class="icon-shopping_cart"></span>[{{ carts|total_items }}]</a></li>
                 </ul>
+                <ul class="navbar-nav ml-auto"> {% if not request.user.is_authenticated %}
+              <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Register</a></li>
+              <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                <li> <form action="{% url 'search' %}"></form></li>
+                {% else %}
+              <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+              {% if not request.user.is_farmer %}
+               <li class="nav-item"><a href="{% url 'farmer' %}" class="nav-link">Pro</a></li>
+              {% endif %}
 
+
+                <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+
+
+              {% endif %}
+                    </ul>
 	      </div>
 	    </div>
 	  </nav>
@@ -135,8 +143,8 @@
             	<div class="block-23 mb-3">
 	              <ul>
 	                <li><span class="icon icon-map-marker"></span><span class="text">Kyrgyztan, Bishkek, Ahunbaeva 133/1 </span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+996 501 592 328</span></a></li>
+	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">information@gmail.com</span></a></li>
 	              </ul>
 	            </div>
             </div>

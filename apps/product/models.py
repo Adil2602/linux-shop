@@ -1,5 +1,8 @@
 from django.db import models
 
+from ..account.models import User
+
+
 # a
 
 # Create your models here.
@@ -22,7 +25,7 @@ class Product(models.Model):
     description = models.TextField('Description', blank=True, null=True)
     expiration_date = models.DateField('expiration date', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='ProductCategory')
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Product')
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'

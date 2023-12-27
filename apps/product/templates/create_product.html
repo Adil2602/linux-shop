@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %} Add Product {% endblock %}
+{% block content %}
+
+  <div class="container">
+    <h2>Add Product</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ form.title.id }}">Title:</label>
+        {{ form.title }}
+        {{ form.title.errors }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.price.id }}">Price:</label>
+        {{ form.price }}
+        {{ form.price.errors }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.photo.id }}">Photo:</label>
+        {{ form.photo }}
+        {{ form.photo.errors }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.description.id }}">Description:</label>
+        {{ form.description }}
+        {{ form.description.errors }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.expiration_date.id}}">Expiration Date:</label>
+        {{ form.expiration_date }}
+        {{ form.expiration_date.errors }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.category.id }}">Category:</label>
+        {{ form.category }}
+        {{ form.category.errors }}
+      </div>
+      <button type="submit" class="btn btn-primary">Create Product</button>
+    </form>
+  </div>
+
+{% endblock %}

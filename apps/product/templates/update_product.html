@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} Update product {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h2 class="heading-section">Update product</h2>
+                <img src="{{ object.photo.url }}" alt="{{ object.title }}" class="img-fluid img-thumbnail">
+
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+                <div class="login-wrap p-4 p-md-5">
+                    <form method="post" class="user-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary rounded submit">Обновить продукт</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector(".user-form");
+            const updateBtn = document.getElementById("update-product-btn");
+
+            updateBtn.addEventListener("click", function () {
+                form.submit();
+            });
+        });
+    </script>
+{% endblock %}
